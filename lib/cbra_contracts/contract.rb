@@ -12,6 +12,7 @@ module CBRAContracts
       @contract_methods << contract_method
     end
 
+    # TODO: Extract to new object concerned with OpenApi generation
     def to_h
       @contract_methods.inject({}) do |hsh, contract_method|
         hsh[contract_method.path] = contract_method.to_h

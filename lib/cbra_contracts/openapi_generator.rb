@@ -18,6 +18,7 @@ module CBRAContracts
     end
 
     def write
+      # Write to a real file/directory
       File.open('openapi.yml', 'w') do |file|
         file.write(to_h.to_yaml)
       end

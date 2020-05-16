@@ -24,6 +24,7 @@ module CBRAContracts
             'content' => {
               'application/json' => {
                 'schema' => {
+                  # TODO: Add parameters and return type
                 },
               },
             },
