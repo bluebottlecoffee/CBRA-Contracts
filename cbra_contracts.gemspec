@@ -6,7 +6,7 @@ require 'cbra_contracts/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'CBRA-Contracts'
-  spec.version       = CbraContracts::VERSION
+  spec.version       = CBRAContracts::VERSION
   spec.authors       = ['Blue Bottle Coffee']
   spec.email         = ['opensource@bluebottlecoffee.com']
 
