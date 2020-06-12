@@ -55,4 +55,18 @@ class DslTest < Minitest::Test
     # Reset it so future tests don't use mocked implementation
     contract_method.implementation = nil
   end
+
+  def test_invalid_arguments
+    wrong_args = assert_raises ArgumentError do
+      TestComponent.just_test_it(the: 'wrong', arguments: true)
+    end
+    assert_equal 'Argument [:when] is missing, Argument [:why] is missing',
+                 wrong_args.message
+
+    wrong_types = assert_raises ArgumentError do
+      TestComponent.just_test_it(when: 0, why: 'because')
+    end
+    assert_equal 'Argument [:when] must be a string, Argument [:why] must be an integer',
+                 wrong_types.message
+  end
 end

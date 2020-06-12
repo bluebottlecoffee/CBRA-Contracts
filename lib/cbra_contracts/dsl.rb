@@ -24,6 +24,8 @@ module CBRAContracts
       define_component_contract_method(contract_method)
 
       yield contract_method
+
+      contract_method.build_argument_schema
     end
 
     # Class private; not meant to be used publicly

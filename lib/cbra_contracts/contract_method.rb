@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'dry/inflector'
+require 'dry/schema'
 require 'cbra_contracts/contract_method_parameter'
 
 module CBRAContracts
@@ -23,8 +24,12 @@ module CBRAContracts
     end
 
     def invoke(args)
-      # validate args against schema
-      implementation.call(args)
+      valid = argument_schema.call(args)
+      if valid.success?
+        implementation.call(args)
+      else
+        raise_argument_error(valid.errors.messages)
+      end
     end
 
     def implementation
@@ -35,12 +40,29 @@ module CBRAContracts
       @implementation = impl
     end
 
+    def build_argument_schema
+      schema = Dry::Schema::DSL.new
+      params.each do |p|
+        schema.required(p.name).filled(p.type)
+      end
+
+      @argument_schema = schema.call
+    end
+
     private
 
-    attr_reader :impl_scope
+    attr_reader :impl_scope, :argument_schema
 
     def default_impl_class
       "#{impl_scope}::#{Dry::Inflector.new.classify(name)}"
+    end
+
+    def raise_argument_error(error_messages)
+      msg = error_messages.map do |m|
+        "Argument #{m.path} #{m.text}"
+      end.join(', ')
+
+      raise ArgumentError, msg
     end
   end
 end
