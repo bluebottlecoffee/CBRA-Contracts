@@ -20,7 +20,7 @@ module CBRAContracts
 
     def contract_method(name, description)
       contract_method = ContractMethod.new(name, description, @@component.to_s)
-      @@contract.contract_methods << contract_method
+      @@contract.add_contract_method(contract_method)
       define_component_contract_method(contract_method)
 
       yield contract_method
