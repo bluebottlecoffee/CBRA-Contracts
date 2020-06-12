@@ -1,6 +1,5 @@
-require "cbra_contracts/version"
+require 'cbra_contracts/version'
 
-module CbraContracts
+module CBRAContracts
   class Error < StandardError; end
-  # Your code goes here...
 end

@@ -6,7 +6,7 @@ require 'cbra_contracts/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'CBRA-Contracts'
-  spec.version       = CbraContracts::VERSION
+  spec.version       = CBRAContracts::VERSION
   spec.authors       = ['Blue Bottle Coffee']
   spec.email         = ['opensource@bluebottlecoffee.com']
 
@@ -22,6 +22,9 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'bin'
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_runtime_dependency 'dry-inflector', '~> 0.2'
+  spec.add_runtime_dependency 'dry-schema', '~> 1.5'
 
   spec.add_development_dependency 'bundler', '~> 2.1'
   spec.add_development_dependency 'minitest', '~> 5.0'
