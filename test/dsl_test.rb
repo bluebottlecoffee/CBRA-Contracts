@@ -11,7 +11,7 @@ class DslTest < Minitest::Test
     define_contract 'Test', 'A contract to test with' do
       contract_method :just_test_it, 'A simple method' do |m|
         m.param :when, :string, 'When to test it'
-        m.param :why, :int, 'A secret testing code'
+        m.param :why, :integer, 'A secret testing code'
         m.produces TestOutput
       end
     end
