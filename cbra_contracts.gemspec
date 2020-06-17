@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'DSL to delcare your Rails component contracts'
   spec.description   = 'DSL to delcare your Rails component contracts'
+  spec.homepage      = 'https://github.com/bluebottlecoffee/CBRA-Contracts'
   spec.license       = 'AGPL'
 
   # Specify which files should be added to the gem when it is released.
