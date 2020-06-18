@@ -44,6 +44,27 @@ class ContactMethodTest < Minitest::Test
     @contract_method.implementation = nil
   end
 
+  def test_optional_params
+    cm = @contract_method.dup
+    cm.param(:opt, :string, 'An optional param', required: false)
+    cm.build_argument_schema
+    new_params = valid_params.merge(opt: 'I am here this time')
+
+    mock_impl = Minitest::Mock.new
+    mock_impl.expect(:call, true, [new_params])
+
+    cm.implementation = mock_impl
+    cm.invoke(new_params)
+
+    mock_impl.verify
+
+    # Now make sure you can still call _without_ the optional param
+    mock_impl.expect(:call, true, [valid_params])
+    cm.invoke(valid_params)
+
+    mock_impl.verify
+  end
+
   class TestMethod
     #no op
     def call(*args)
