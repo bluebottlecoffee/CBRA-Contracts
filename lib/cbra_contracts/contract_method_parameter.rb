@@ -10,6 +10,7 @@ module CBRAContracts
       float
       symbol
       hash
+      bool
     ].freeze
 
     attr_reader :name, :type, :description

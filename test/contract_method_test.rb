@@ -13,6 +13,7 @@ class ContactMethodTest < Minitest::Test
     @contract_method.param(:p3, :float, 'Float param')
     @contract_method.param(:p4, :symbol, 'Symbol param')
     @contract_method.param(:p5, :hash, 'Hash param')
+    @contract_method.param(:p6, :bool, 'Boolean param')
     @contract_method.build_argument_schema
   end
 
@@ -23,7 +24,8 @@ class ContactMethodTest < Minitest::Test
         p2: 8,
         p3: 8.8,
         p4: :ok,
-        p5: { a: 'nested', hash: 'param' }
+        p5: { a: 'nested', hash: 'param' },
+        p6: true,
       )
 
     wrong_args = assert_raises ArgumentError do
