@@ -4,7 +4,13 @@ module CBRAContracts
   class Parameter
     class InvalidParameterType < Error; end
 
-    VALID_TYPES = %i[string integer float symbol].freeze
+    VALID_TYPES = %i[
+      string
+      integer
+      float
+      symbol
+      hash
+    ].freeze
 
     attr_reader :name, :type, :description
 

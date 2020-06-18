@@ -12,12 +12,20 @@ class ContactMethodTest < Minitest::Test
     @contract_method.param(:p2, :integer, 'Integer param')
     @contract_method.param(:p3, :float, 'Float param')
     @contract_method.param(:p4, :symbol, 'Symbol param')
+    @contract_method.param(:p5, :hash, 'Hash param')
     @contract_method.build_argument_schema
   end
 
   def test_parameter_types
     assert_equal :ok,
-      @contract_method.invoke(p1: 'hi', p2: 8, p3: 8.8, p4: :ok)
+      @contract_method.invoke(
+        p1: 'hi',
+        p2: 8,
+        p3: 8.8,
+        p4: :ok,
+        p5: { a: 'nested', hash: 'param' }
+      )
+
     wrong_args = assert_raises ArgumentError do
       @contract_method.invoke(the: 'wrong', arguments: true)
     end
