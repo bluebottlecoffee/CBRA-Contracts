@@ -31,6 +31,19 @@ class ContactMethodTest < Minitest::Test
     assert wrong_types.message.include?('Argument [:str] must be a string')
   end
 
+  def test_extra_params_are_filtered
+    mock_impl = Minitest::Mock.new
+    mock_impl.expect(:call, true, [valid_params])
+
+    @contract_method.implementation = mock_impl
+    @contract_method.invoke(valid_params.merge(an: 'extra one'))
+
+    mock_impl.verify
+
+    # Reset it so future tests don't use mocked implementation
+    @contract_method.implementation = nil
+  end
+
   class TestMethod
     #no op
     def call(*args)

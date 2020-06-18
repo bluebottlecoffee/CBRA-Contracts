@@ -26,7 +26,7 @@ module CBRAContracts
     def invoke(args)
       valid = argument_schema.call(args)
       if valid.success?
-        implementation.call(args)
+        implementation.call(valid.to_h)
       else
         raise_argument_error(valid.errors.messages)
       end
