@@ -18,15 +18,7 @@ class ContactMethodTest < Minitest::Test
   end
 
   def test_parameter_types
-    assert_equal :ok,
-      @contract_method.invoke(
-        str: 'hi',
-        int: 8,
-        flt: 8.8,
-        sym: :ok,
-        hsh: { a: 'nested', hash: 'param' },
-        bln: true,
-      )
+    assert_equal :ok, @contract_method.invoke(valid_params)
 
     wrong_args = assert_raises ArgumentError do
       @contract_method.invoke(the: 'wrong', arguments: true)
@@ -44,5 +36,18 @@ class ContactMethodTest < Minitest::Test
     def call(*args)
       :ok
     end
+  end
+
+  private
+
+  def valid_params
+    {
+      str: 'hi',
+      int: 8,
+      flt: 8.8,
+      sym: :ok,
+      hsh: { a: 'nested', hash: 'param' },
+      bln: true,
+    }
   end
 end
