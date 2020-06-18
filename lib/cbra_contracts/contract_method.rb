@@ -15,8 +15,8 @@ module CBRAContracts
       @params = []
     end
 
-    def param(name, type, description)
-      @params << Parameter.new(name, type, description)
+    def param(name, type, description, opts = {})
+      @params << Parameter.new(name, type, description, opts)
     end
 
     def produces(klass)
@@ -26,7 +26,7 @@ module CBRAContracts
     def invoke(args)
       valid = argument_schema.call(args)
       if valid.success?
-        implementation.call(args)
+        implementation.call(valid.to_h)
       else
         raise_argument_error(valid.errors.messages)
       end
@@ -43,7 +43,11 @@ module CBRAContracts
     def build_argument_schema
       schema = Dry::Schema::DSL.new
       params.each do |p|
-        schema.required(p.name).filled(p.type)
+        if p.required?
+          schema.required(p.name).filled(p.type)
+        else
+          schema.optional(p.name).filled(p.type)
+        end
       end
 
       @argument_schema = schema.call

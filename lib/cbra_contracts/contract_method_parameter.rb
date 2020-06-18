@@ -4,16 +4,28 @@ module CBRAContracts
   class Parameter
     class InvalidParameterType < Error; end
 
-    VALID_TYPES = %i[string integer float symbol].freeze
+    VALID_TYPES = %i[
+      string
+      integer
+      float
+      symbol
+      hash
+      bool
+    ].freeze
 
-    attr_reader :name, :type, :description
+    attr_reader :name, :type, :description, :required
 
-    def initialize(name, type, description)
+    def initialize(name, type, description, opts)
       raise InvalidParameterType unless VALID_TYPES.include?(type)
 
       @name = name
       @type = type
       @description = description
+      @required = opts.fetch(:required) { true }
+    end
+
+    def required?
+      required
     end
   end
 end
