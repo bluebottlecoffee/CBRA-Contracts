@@ -53,7 +53,10 @@ Let's define a contract!
 ```ruby
 # A sample `Weather` component of our application
 
-# weather/lib/contract.rb
+# ./weather/lib/weather/contract.rb
+
+require 'cbra_contracts/dsl'
+
 module Weather
   extend CBRAContracts::DSL
   
@@ -78,7 +81,7 @@ By convention, the implementation of the lookup should live in the
 `weather/lib/weather/lookup.rb` class.
 
 ```ruby
-# weather/lib/weather/lookup.rb
+# ./weather/lib/weather/lookup.rb
 
 module Weather
   class Lookup
