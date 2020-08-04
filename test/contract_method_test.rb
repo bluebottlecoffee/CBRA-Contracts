@@ -14,6 +14,7 @@ class ContactMethodTest < Minitest::Test
     @contract_method.param(:sym, :symbol, 'Symbol param')
     @contract_method.param(:hsh, :hash, 'Hash param')
     @contract_method.param(:bln, :bool, 'Boolean param')
+    @contract_method.param(:ary, :array, 'Array param')
     @contract_method.build_argument_schema
   end
 
@@ -82,6 +83,7 @@ class ContactMethodTest < Minitest::Test
       sym: :ok,
       hsh: { a: 'nested', hash: 'param' },
       bln: true,
+      ary: [1, 2, 3]
     }
   end
 end
