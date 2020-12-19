@@ -46,9 +46,9 @@ module CBRAContracts
       schema = Dry::Schema::DSL.new
       params.each do |p|
         if p.required?
-          schema.required(p.name).filled(p.type)
+          schema.required(p.name).maybe(p.type)
         else
-          schema.optional(p.name).filled(p.type)
+          schema.optional(p.name).maybe(p.type)
         end
       end
 

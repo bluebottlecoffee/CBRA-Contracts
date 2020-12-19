@@ -32,6 +32,10 @@ class ContactMethodTest < Minitest::Test
     assert wrong_types.message.include?('Argument [:str] must be a string')
   end
 
+  def test_nullable_values
+    assert_equal :ok, @contract_method.invoke(valid_params.merge(str: nil))
+  end
+
   def test_extra_params_are_filtered
     mock_impl = Minitest::Mock.new
     mock_impl.expect(:call, true, [valid_params])
