@@ -70,6 +70,12 @@ class ContactMethodTest < Minitest::Test
     mock_impl.verify
   end
 
+  def test_no_params
+    cm = @contract_method.dup
+    cm.build_argument_schema
+    assert_equal :ok, cm.invoke
+  end
+
   class TestMethod
     #no op
     def call(*args)

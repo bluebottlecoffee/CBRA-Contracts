@@ -23,7 +23,9 @@ module CBRAContracts
       @return_type = klass
     end
 
-    def invoke(args)
+    def invoke(args = {})
+      return implementation.call if args.empty?
+
       valid = argument_schema.call(args)
       if valid.success?
         implementation.call(valid.to_h)
