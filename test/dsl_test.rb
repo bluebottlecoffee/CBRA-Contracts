@@ -14,10 +14,20 @@ class DslTest < Minitest::Test
         m.param :why, :integer, 'A secret testing code'
         m.produces TestOutput
       end
+
+      contract_method :no_args, 'A method with no args' do |m|
+        m.produces TestOutput
+      end
     end
 
     class JustTestIt
       def call(*_args)
+      end
+    end
+
+    class NoArg
+      def call
+        TestOutput.new(true)
       end
     end
   end
@@ -54,5 +64,10 @@ class DslTest < Minitest::Test
 
     # Reset it so future tests don't use mocked implementation
     contract_method.implementation = nil
+  end
+
+  def test_contract_method_with_no_args
+    assert TestComponent.respond_to? :no_args
+    assert TestComponent.no_args.works
   end
 end

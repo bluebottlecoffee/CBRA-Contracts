@@ -44,7 +44,7 @@ module CBRAContracts
     # Class private; not meant to be used publicly
     def define_component_contract_method(contract_method)
       @@component.module_eval do
-        self.define_method(contract_method.name) do |args|
+        self.define_method(contract_method.name) do |args = {}|
           contract_method.invoke(args)
         end
         module_function contract_method.name

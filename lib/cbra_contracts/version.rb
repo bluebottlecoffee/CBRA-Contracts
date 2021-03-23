@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module CBRAContracts
-  VERSION = '0.5.1b'
+  VERSION = '0.5.2b'
 end
